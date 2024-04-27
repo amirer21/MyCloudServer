@@ -5,7 +5,7 @@ import zipfile
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'D:\\python_workspace\\MyCloudServer\\shareFile'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 제한 크기: 16MB
+#app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 제한 크기: 16MB
 
 # 파일 업로드를 위한 경로 (여러 파일 처리)
 @app.route('/upload', methods=['POST'])
@@ -51,19 +51,30 @@ def download_selected_files():
 @app.route('/')
 def index():
     return '''
+    <!-- Bootstrap CDN 추가 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 홈페이지에 Bootstrap 클래스 적용 -->
     <!doctype html>
     <html>
-    <head><title>My Cloud Server</title></head>
+    <head>
+    <title>My Cloud Server</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
     <body>
-    <h1>Welcome to My Cloud Server</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="file" name="file" multiple>
-      <input type="submit" value="Upload">
+    <div class="container">
+    <h1 class="mt-5 mb-3">Welcome to My Cloud Server</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data" class="mb-3">
+        <input type="file" name="file" multiple class="form-control">
+        <button type="submit" class="btn btn-primary mt-3">Upload</button>
     </form>
-    <a href="/gallery">View Gallery</a>
+    <a href="/gallery" class="btn btn-info">View Gallery</a>
+    </div>
     </body>
     </html>
+
     '''
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5005)
+
