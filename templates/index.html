@@ -1,17 +1,23 @@
+<!-- Bootstrap CDN 추가 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- 홈페이지에 Bootstrap 클래스 적용 -->
 <!doctype html>
 <html>
 <head>
-  <title>Dev Hong Cloud Server</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Dev Hong Cloud Server</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+{% include '_notifications.html' %}
+
 <div class="container">
-  <h1 class="mt-5 mb-3">Welcome to Dev Hong Cloud Server</h1>
-  <form action="/upload" method="post" enctype="multipart/form-data" class="mb-3">
+<h1 class="mt-5 mb-3">Welcome to Dev Hong Cloud Server</h1>
+<form action="/upload" method="post" enctype="multipart/form-data" class="mb-3">
     <input type="file" name="file" multiple class="form-control">
     <button type="submit" class="btn btn-primary mt-3">Upload</button>
-  </form>
-  <a href="/gallery" class="btn btn-info">사진 갤러리(다운로드 페이지 이동)</a>
+</form>
+<a href="/gallery" class="btn btn-info">사진 갤러리(다운로드 페이지 이동)</a>
 </div>
 </body>
 </html>
