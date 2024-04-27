@@ -2,6 +2,8 @@ from flask import Flask, request, send_from_directory, render_template, redirect
 from werkzeug.utils import secure_filename
 import os
 import zipfile
+from flask import redirect, url_for
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'D:\\python_workspace\\MyCloudServer\\shareFile'
@@ -20,7 +22,9 @@ def upload_files():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             uploaded_files.append(filename)
-    return f'Uploaded files: {", ".join(uploaded_files)}'
+    # 파일 업로드 완료 후 메인 페이지로 리디렉션
+    return redirect(url_for('index'))
+
 
 # 파일 다운로드를 위한 경로
 @app.route('/download/<filename>')
