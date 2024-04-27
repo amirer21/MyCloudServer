@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'D:\\python_workspace\\MyCloudServer\\shareFile'
+app.config['UPLOAD_FOLDER'] = 'D:\\python_workspace\\my-cloud\\share-file'
 
 # 파일 업로드를 위한 경로
 @app.route('/upload', methods=['POST'])
@@ -31,6 +31,14 @@ def preview_file(filename):
         return '<img src="{}">'.format(f'/download/{filename}')
     return 'File not supported for preview'
 
+# 모든 이미지 파일 미리보기
+@app.route('/gallery')
+def gallery():
+    image_extensions = ('.png', '.jpg', '.jpeg', '.gif')
+    files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if f.endswith(image_extensions)]
+    images_html = ''.join(f'<img src="/download/{f}" style="width:100px; margin:10px;" />' for f in files)
+    return f'<div>{images_html}</div>'
+
 # 홈페이지
 @app.route('/')
 def index():
@@ -44,6 +52,7 @@ def index():
       <input type="file" name="file">
       <input type="submit" value="Upload">
     </form>
+    <a href="/gallery">View Gallery</a>
     </body>
     </html>
     '''
