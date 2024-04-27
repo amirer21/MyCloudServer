@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head><title>Gallery</title></head>
+<body>
+<h1>File Gallery</h1>
+<form action="/download-selected" method="post">
+  {% for file in files %}
+    <div>
+      <input type="checkbox" name="files" value="{{ file }}">
+      <label>{{ file }}</label>
+    </div>
+  {% endfor %}
+  <input type="submit" value="Download Selected">
+</form>
+</body>
+</html>
